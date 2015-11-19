@@ -22,7 +22,7 @@ Item {
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.left: parent.left
-        anchors.leftMargin: 0
+        anchors.leftMargin: Screen.pixelDensity*5
         onClicked: {
             console.log("Project DocList '" + listDocSetsPage.projectName + "' requesting go back...")
             listDocSetsPage.navigateBack()
@@ -41,19 +41,19 @@ Item {
         anchors.bottom: parent.top
         anchors.bottomMargin: -40
         anchors.right: parent.right
-        anchors.rightMargin: 0
+        anchors.rightMargin: Screen.pixelDensity*5
     }
 
     GridView {
         id: docSetList
-        anchors.leftMargin: 3
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 15
+        anchors.bottomMargin: Screen.pixelDensity*5
         anchors.right: parent.right
-        anchors.rightMargin: 30
+        anchors.rightMargin: Screen.pixelDensity*10
         anchors.left: parent.left
+        anchors.leftMargin: Screen.pixelDensity*10
         anchors.top: projectName.bottom
-        anchors.topMargin: 15
+        anchors.topMargin: Screen.pixelDensity*5
         delegate: Item {
             x: 5
             height: 50
