@@ -15,11 +15,14 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Example
+  exposed-modules:     Example, BeholderObserver.Data, BeholderObserver.Constant
   build-depends:       base >= 4.7 && < 5
                      , aeson
                      , scotty
                      , wai
+                     , text
+                     , bytestring
+                     , blaze-html
   default-language:    Haskell2010
 
 executable beholder-observer-exe
