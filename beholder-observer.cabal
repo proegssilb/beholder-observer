@@ -1,12 +1,13 @@
 name:                beholder-observer
 version:             0.1.0.0
-synopsis:            A tool to organize documents, doc properties and analysis.
+synopsis:            Initial project template from stack
 description:         Please see README.md
 homepage:            http://github.com/proegssilb/beholder-observer#readme
-license:             Apache
+license:             BSD3
 license-file:        LICENSE
-author:              minifig404
+author:              David Bliss
 maintainer:          proegssilb@gmail.com
+copyright:           (c) David Bliss, see LICENSE
 category:            application
 build-type:          Simple
 -- extra-source-files:
@@ -14,17 +15,22 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Lib
+  exposed-modules:     Example, BeholderObserver.Data, BeholderObserver.Constant
   build-depends:       base >= 4.7 && < 5
+                     , aeson
+                     , scotty
+                     , wai
+                     , text
+                     , bytestring
+                     , blaze-html
   default-language:    Haskell2010
 
 executable beholder-observer-exe
   hs-source-dirs:      app
   main-is:             Main.hs
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  ghc-options:         -threaded -O2 -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , beholder-observer
-                     , gtk3
   default-language:    Haskell2010
 
 test-suite beholder-observer-test
@@ -33,7 +39,11 @@ test-suite beholder-observer-test
   main-is:             Spec.hs
   build-depends:       base
                      , beholder-observer
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+                     , hspec
+                     , hspec-wai
+                     , hspec-wai-json
+                     , aeson
+  ghc-options:         -threaded -O2 -rtsopts -with-rtsopts=-N
   default-language:    Haskell2010
 
 source-repository head
