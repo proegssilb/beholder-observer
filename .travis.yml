@@ -6,7 +6,7 @@ sudo: false
 
 install:
   # stack
-  - export STACK_YAML=stack-$GHCVER.yaml
+  #- export STACK_YAML=stack-$GHCVER.yaml
   - mkdir -p ~/.local/bin
   - travis_retry curl -L https://github.com/commercialhaskell/stack/releases/download/v0.1.4.0/stack-0.1.4.0-x86_64-linux.tar.gz | tar -xvzf -
   - mv stack ~/.local/bin
