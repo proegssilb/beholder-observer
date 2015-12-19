@@ -4,6 +4,8 @@ env:
 
 sudo: false
 
+language: haskell
+
 install:
   # stack
   #- export STACK_YAML=stack-$GHCVER.yaml
