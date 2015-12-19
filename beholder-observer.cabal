@@ -23,6 +23,9 @@ library
                      , text
                      , bytestring
                      , blaze-html
+                     , hspec
+                     , hspec-wai
+                     , hspec-wai-json
   default-language:    Haskell2010
 
 executable beholder-observer-exe

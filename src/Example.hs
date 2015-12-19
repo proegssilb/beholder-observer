@@ -18,17 +18,17 @@ renderProject p = H.html . H.body $ do
   H.ul . mapM_ drawItem . projDocSets $ p
   where drawItem = H.li . H.toHtml . dsName
 
-renderProjectList :: DataLoader d => d -> H.Html
-renderProjectList dl = H.html $ H.body $ do
+renderProjectList :: [Project] -> H.Html
+renderProjectList pl = H.html $ H.body $ do
   H.h1 "What are you working on today?"
-  H.ul . mapM_ drawItem . listProjects $ dl
+  H.ul . mapM_ drawItem $ pl
   where drawItem p = H.li . (H.a  H.! url p ). H.toHtml . projName $ p
         url = HA.href . H.toValue . T.append "/proj/" . projId
 
-site :: ConstantDataLoader -> S.ScottyM ()
+site :: DataLoader dl => dl -> S.ScottyM ()
 site dl = do
   S.get "/" $
-    S.html . TR.renderHtml . renderProjectList $ dl
+    S.html . TR.renderHtml . renderProjectList . listProjects $ dl
   S.get "/test" $ S.text "Hello World!"
   S.get "/proj/:projId" $ do
     pid <- S.param "projId"
