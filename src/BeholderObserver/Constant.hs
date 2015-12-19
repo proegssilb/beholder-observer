@@ -55,7 +55,7 @@ projects = [
 -------------------------------------
 -- Typeclass implementation.
 instance DataLoader ConstantDataLoader where
-  listProjects dl = projects
-  readDocSets dl = projDocSets
-  readDocs dl = dsDocs
-  findDoc dl _ = []
+  listProjects dl = return projects
+  readDocSets dl = return . projDocSets
+  readDocs dl = return . dsDocs
+  findDoc dl _ = return []

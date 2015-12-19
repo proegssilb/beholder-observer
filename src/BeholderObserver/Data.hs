@@ -33,7 +33,7 @@ data Doc = TextDoc {
 }
 
 class DataLoader dl where
-  listProjects :: dl -> [Project]
-  readDocSets :: dl -> Project -> [DocSet]
-  readDocs :: dl -> DocSet -> [Doc]
-  findDoc :: dl -> Text -> [Doc]
+  listProjects :: dl -> IO [Project]
+  readDocSets :: dl -> Project -> IO [DocSet]
+  readDocs :: dl -> DocSet -> IO [Doc]
+  findDoc :: dl -> Text -> IO [Doc]

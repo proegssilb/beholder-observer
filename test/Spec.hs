@@ -5,8 +5,9 @@ import           Test.Hspec
 import           Test.Hspec.Wai
 import           Test.Hspec.Wai.JSON
 import           Data.Aeson (Value(..), object, (.=))
-
-import           Example (app)
+import qualified Web.Scotty as S
+import           BeholderObserver.Dispatch
+import           BeholderObserver.Constant
 
 main :: IO ()
 main = do
@@ -14,7 +15,7 @@ main = do
   hspec spec
 
 spec :: Spec
-spec = with app $ do
+spec = with (S.scottyApp $ site ConstantDataLoader) $ do
   describe "GET /" $ do
     it "has 'Content-Type: text/plain; charset=utf-8'" $ do
       get "/" `shouldRespondWith` 200 {matchHeaders = ["Content-Type" <:> "text/html; charset=utf-8"]}

@@ -1,14 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Example (runApp, app) where
-
-import           Data.Aeson (Value(..), object, (.=))
-import           Network.Wai (Application)
-import           BeholderObserver.Constant
+module BeholderObserver.Views
+    (
+    renderProject,
+    renderProjectList
+    ) where
 import           BeholderObserver.Data
-import           Data.Foldable (asum)
 import qualified Text.Blaze.Html5 as H
 import qualified Text.Blaze.Html5.Attributes as HA
-import qualified Web.Scotty as S
 import qualified Text.Blaze.Html.Renderer.Text as TR
 import qualified Data.Text as T
 
@@ -24,18 +22,3 @@ renderProjectList pl = H.html $ H.body $ do
   H.ul . mapM_ drawItem $ pl
   where drawItem p = H.li . (H.a  H.! url p ). H.toHtml . projName $ p
         url = HA.href . H.toValue . T.append "/proj/" . projId
-
-site :: DataLoader dl => dl -> S.ScottyM ()
-site dl = do
-  S.get "/" $
-    S.html . TR.renderHtml . renderProjectList . listProjects $ dl
-  S.get "/test" $ S.text "Hello World!"
-  S.get "/proj/:projId" $ do
-    pid <- S.param "projId"
-    S.html . TR.renderHtml $ renderProject . head . filter (\p -> projId p == pid) . listProjects $ dl
-
-app :: IO Application
-app = S.scottyApp $ site ConstantDataLoader
-
-runApp :: IO ()
-runApp = S.scotty 8080 $ site ConstantDataLoader

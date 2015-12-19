@@ -1,6 +1,8 @@
 module Main where
 
-import           Example (runApp)
+import           BeholderObserver.Dispatch
+import           BeholderObserver.Constant
+import qualified Web.Scotty as S
 
 main :: IO ()
-main = runApp
+main = S.scotty 8080 $ site ConstantDataLoader
