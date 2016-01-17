@@ -3,9 +3,10 @@ module BeholderObserver.Dispatch (site) where
 
 import           Data.Aeson (Value(..), object, (.=))
 import           Network.Wai (Application)
-import           BeholderObserver.Constant
+import           BeholderObserver.AcidState
 import           BeholderObserver.Data
 import           BeholderObserver.Views
+import           BeholderObserver.Controller
 import           Data.Foldable (asum)
 import           Control.Monad.IO.Class
 import qualified Text.Blaze.Html5 as H
@@ -24,3 +25,7 @@ site dl = do
     pid <- S.param "projId"
     projects <- liftIO . listProjects $ dl
     S.html . TR.renderHtml . renderProject . head . filter (\p -> projId p == pid) $ projects
+  S.post "/proj" $ do
+    projectName <- S.param "projName"
+    project <- liftIO $ addNewProject dl projectName
+    S.redirect "/"

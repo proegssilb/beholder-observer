@@ -20,5 +20,8 @@ renderProjectList :: [Project] -> H.Html
 renderProjectList pl = H.html $ H.body $ do
   H.h1 "What are you working on today?"
   H.ul . mapM_ drawItem $ pl
+  H.form H.! HA.method "post" H.! HA.action "/proj" $ do
+    H.input H.! HA.type_ "text" H.! HA.name "projName"
+    H.input H.! HA.type_ "submit"
   where drawItem p = H.li . (H.a  H.! url p ). H.toHtml . projName $ p
         url = HA.href . H.toValue . T.append "/proj/" . projId

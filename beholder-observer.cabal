@@ -1,5 +1,5 @@
 name:                beholder-observer
-version:             0.1.0.0
+version:             0.2.0.0
 synopsis:            Initial project template from stack
 description:         Please see README.md
 homepage:            http://github.com/proegssilb/beholder-observer#readme
@@ -15,7 +15,12 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     BeholderObserver.Dispatch, BeholderObserver.Data, BeholderObserver.Constant, BeholderObserver.Views
+  exposed-modules:     BeholderObserver.Dispatch,
+                       BeholderObserver.Data,
+                       BeholderObserver.Constant,
+                       BeholderObserver.Views,
+                       BeholderObserver.AcidState,
+                       BeholderObserver.Controller
   build-depends:       base >= 4.7 && < 5
                      , aeson
                      , scotty
@@ -27,6 +32,10 @@ library
                      , hspec-wai
                      , hspec-wai-json
                      , transformers
+                     , acid-state
+                     , safecopy
+                     , containers
+                     , mtl
   default-language:    Haskell2010
 
 executable beholder-observer-exe

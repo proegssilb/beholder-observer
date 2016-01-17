@@ -1,8 +1,11 @@
 module Main where
 
 import           BeholderObserver.Dispatch
-import           BeholderObserver.Constant
+import           BeholderObserver.AcidState
+import           BeholderObserver.Data
 import qualified Web.Scotty as S
 
 main :: IO ()
-main = S.scotty 8080 $ site ConstantDataLoader
+main = do
+  dl <- load :: IO AcidStateDataLoader
+  S.scotty 8080 $ site dl

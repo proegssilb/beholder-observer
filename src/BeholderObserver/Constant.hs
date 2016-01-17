@@ -54,8 +54,12 @@ projects = [
 
 -------------------------------------
 -- Typeclass implementation.
+
 instance DataLoader ConstantDataLoader where
+  load = return ConstantDataLoader
   listProjects dl = return projects
   readDocSets dl = return . projDocSets
   readDocs dl = return . dsDocs
   findDoc dl _ = return []
+  readOnly _ = return True
+  addProject = error "Tried to edit read-only data."
