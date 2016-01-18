@@ -6,7 +6,7 @@
 {-# LANGUAGE FlexibleInstances    #-}
 
 module BeholderObserver.AcidState (
-  AcidStateDataLoader(..)
+  AcidStateDataLoader(..), KeyVal(..)
 )
 
 where

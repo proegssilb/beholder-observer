@@ -36,6 +36,7 @@ library
                      , safecopy
                      , containers
                      , mtl
+                     , directory
   default-language:    Haskell2010
 
 executable beholder-observer-exe
@@ -50,7 +51,8 @@ executable beholder-observer-exe
 test-suite beholder-observer-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
-  main-is:             Spec.hs
+  main-is:             Main.hs
+  other-modules:       WebSpec
   build-depends:       base
                      , beholder-observer
                      , hspec
@@ -58,6 +60,10 @@ test-suite beholder-observer-test
                      , hspec-wai-json
                      , aeson
                      , scotty
+                     , directory
+                     , QuickCheck
+                     , acid-state
+                     , containers
   ghc-options:         -threaded -O2 -rtsopts -with-rtsopts=-N
   default-language:    Haskell2010
 

@@ -13,15 +13,25 @@ import qualified Data.Text as T
 renderProject :: Project -> H.Html
 renderProject p = H.html . H.body $ do
   H.h1 . H.toHtml . projName $ p
-  H.ul . mapM_ drawItem . projDocSets $ p
-  where drawItem = H.li . H.toHtml . dsName
+  renderItemList (drawItem p) . projDocSets $ p
+  renderNewItemForm "dsName" (T.append "/proj/" $ projId p) "New DocSet"
+  where drawItem p ds = (dsName ds, dsUrl p ds)
+        dsUrl p ds = T.intercalate "/" ["/proj/", projId p, dsId ds]
 
 renderProjectList :: [Project] -> H.Html
 renderProjectList pl = H.html $ H.body $ do
   H.h1 "What are you working on today?"
-  H.ul . mapM_ drawItem $ pl
-  H.form H.! HA.method "post" H.! HA.action "/proj" $ do
-    H.input H.! HA.type_ "text" H.! HA.name "projName"
-    H.input H.! HA.type_ "submit"
-  where drawItem p = H.li . (H.a  H.! url p ). H.toHtml . projName $ p
-        url = HA.href . H.toValue . T.append "/proj/" . projId
+  renderItemList renderProj pl
+  renderNewItemForm "projName" "/proj" "New Project"
+  where renderProj p = (projName p, T.append "/proj/" $ projId p)
+
+renderItemList :: (a -> (T.Text, T.Text)) -> [a] -> H.Html
+renderItemList renderer = H.ul . mapM_ (drawItem . renderer)
+  where drawItem (ln, lu) = H.li $ H.a H.! HA.href (H.toValue lu) $ H.toHtml ln
+        drawItem :: (T.Text, T.Text) -> H.Html
+
+renderNewItemForm :: T.Text -> T.Text -> T.Text -> H.Html
+renderNewItemForm argName actionStr btnText =
+  H.form H.! HA.method "post" H.! HA.action (H.toValue actionStr) $ do
+    H.input H.! HA.type_ "text" H.! HA.name (H.toValue argName)
+    H.input H.! HA.type_ "submit" H.! HA.value (H.toValue btnText)
