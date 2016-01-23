@@ -15,13 +15,13 @@ data Project = Project {
   projId :: Text,
   projName :: Text,
   projDocSets :: [DocSet]
-}
+} deriving (Show, Eq)
 
 data DocSet = DocSet {
   dsId :: Text,
   dsName :: Text,
   dsDocs :: [Doc]
-}
+} deriving (Show, Eq)
 
 data Doc = TextDoc {
   docTitle :: Text,
@@ -31,7 +31,7 @@ data Doc = TextDoc {
 --  docTitle :: Text,
 --  docId :: Text,
 --  docHtml :: Html
-}
+} deriving (Show, Eq)
 
 class DataLoader dl where
   load :: IO dl
