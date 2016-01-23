@@ -6,6 +6,7 @@ module WebSpec (spec) where
   import           Test.Hspec.Wai.JSON
   import           Data.Aeson (Value(..), object, (.=))
   import           Data.Acid
+  import           Data.Acid.Memory
   import           System.Directory (removeDirectoryRecursive)
   import           Data.Map as M (empty)
   import qualified Web.Scotty as S
@@ -17,7 +18,7 @@ module WebSpec (spec) where
 
   spec :: Spec
   spec = beforeAll (do
-      as <- openLocalStateFrom "testState" (KeyVal M.empty)
+      as <- openMemoryState (KeyVal M.empty)
       S.scottyApp $ site as) $
       do
     describe "GET /" $
