@@ -7,7 +7,6 @@ module WebSpec (spec) where
   import           Data.Aeson (Value(..), object, (.=))
   import           Data.Acid
   import           Data.Acid.Memory
-  import           System.Directory (removeDirectoryRecursive)
   import           Data.Map as M (empty)
   import qualified Web.Scotty as S
   import           BeholderObserver.Dispatch
