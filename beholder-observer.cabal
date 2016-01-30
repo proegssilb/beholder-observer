@@ -41,7 +41,7 @@ library
 executable beholder-observer-exe
   hs-source-dirs:      app
   main-is:             Main.hs
-  ghc-options:         -threaded -O2 -rtsopts -with-rtsopts=-N
+  ghc-options:         -threaded -O2 +RTS -N -RTS
   build-depends:       base
                      , beholder-observer
                      , scotty
@@ -50,6 +50,7 @@ executable beholder-observer-exe
 test-suite beholder-observer-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
+  ghc-options:         -threaded -O2 +RTS -N -RTS
   main-is:             Main.hs
   other-modules:       WebSpec, AcidStateSpec, TestUtil
   build-depends:       base
