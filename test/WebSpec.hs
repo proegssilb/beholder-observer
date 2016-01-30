@@ -3,7 +3,6 @@ module WebSpec (spec) where
 
   import           Test.Hspec
   import           Test.Hspec.Wai
-  import           Test.Hspec.Wai.JSON
   import           Data.Aeson (Value(..), object, (.=))
   import           Data.Acid
   import           Data.Acid.Memory

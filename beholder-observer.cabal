@@ -22,7 +22,6 @@ library
                        BeholderObserver.AcidState,
                        BeholderObserver.Controller
   build-depends:       base >= 4.7 && < 5
-                     , aeson
                      , scotty
                      , wai
                      , text
@@ -30,7 +29,6 @@ library
                      , blaze-html
                      , hspec
                      , hspec-wai
-                     , hspec-wai-json
                      , transformers
                      , acid-state
                      , safecopy

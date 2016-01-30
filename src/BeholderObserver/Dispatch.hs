@@ -1,7 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 module BeholderObserver.Dispatch (site) where
 
-import           Data.Aeson (Value(..), object, (.=))
 import           Network.Wai (Application)
 import           BeholderObserver.AcidState
 import           BeholderObserver.Data
